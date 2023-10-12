@@ -11,10 +11,11 @@ router.post(
   UserController.insertIntoDb
 );
 router.patch(
-    '/:id',
-    validateRequest(UserValidation.update),
-    UserController.updateUser
-  );
+  '/:id',
+  validateRequest(UserValidation.update),
+  UserController.updateUser
+);
+router.delete('/:id', UserController.deleteUser);
 router.get('/:id', UserController.getSingleData);
 router.get('/', UserController.getUserFromDb);
 
