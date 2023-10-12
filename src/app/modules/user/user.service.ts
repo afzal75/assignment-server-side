@@ -14,63 +14,73 @@ const insertIntoDb = async (data: User): Promise<User> => {
 };
 
 const getUserFromDb = async (
-    filters: IUserFilterRequest,
-    options: IPaginationOptions
-  ) => {
-    const { limit, page, skip } = paginationHelpers.calculatePagination(options);
-  
-    const { searchTerm, ...filterData } = filters;
-  
-    const andConditions = [];
-  
-    if (searchTerm) {
-      andConditions.push({
-        OR: userSearchableFields.map(field => ({
-          [field]: {
-            contains: searchTerm,
-            mode: 'insensitive',
-          },
-        })),
-      });
-    }
-  
-    if (Object.keys(filterData).length > 0) {
-      andConditions.push({
-        AND: Object.keys(filterData).map(key => ({
-          [key]: {
-            equals: (filterData as any)[key],
-          },
-        })),
-      });
-    }
-  
-    const whereConditions: Prisma.UserWhereInput =
-      andConditions.length > 0 ? { AND: andConditions } : {};
-  
-    const result = await prisma.user.findMany({
-      where: whereConditions,
-      skip,
-      take: limit,
-      orderBy:
-        options.sortBy && options.sortOrder
-          ? { [options.sortBy]: options.sortOrder }
-          : {
-              createdAt: 'desc',
-            },
+  filters: IUserFilterRequest,
+  options: IPaginationOptions
+) => {
+  const { limit, page, skip } = paginationHelpers.calculatePagination(options);
+
+  const { searchTerm, ...filterData } = filters;
+
+  const andConditions = [];
+
+  if (searchTerm) {
+    andConditions.push({
+      OR: userSearchableFields.map(field => ({
+        [field]: {
+          contains: searchTerm,
+          mode: 'insensitive',
+        },
+      })),
     });
-  
-    const total = await prisma.user.count({ where: whereConditions });
-    return {
-      meta: {
-        total,
-        page,
-        limit,
-      },
-      data: result,
-    };
+  }
+
+  if (Object.keys(filterData).length > 0) {
+    andConditions.push({
+      AND: Object.keys(filterData).map(key => ({
+        [key]: {
+          equals: (filterData as any)[key],
+        },
+      })),
+    });
+  }
+
+  const whereConditions: Prisma.UserWhereInput =
+    andConditions.length > 0 ? { AND: andConditions } : {};
+
+  const result = await prisma.user.findMany({
+    where: whereConditions,
+    skip,
+    take: limit,
+    orderBy:
+      options.sortBy && options.sortOrder
+        ? { [options.sortBy]: options.sortOrder }
+        : {
+            createdAt: 'desc',
+          },
+  });
+
+  const total = await prisma.user.count({ where: whereConditions });
+  return {
+    meta: {
+      total,
+      page,
+      limit,
+    },
+    data: result,
   };
+};
+
+const getSingleData = async (id: string): Promise<User | null> => {
+  const result = await prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });
+  return result;
+};
 
 export const UserService = {
-    insertIntoDb,
-    getUserFromDb
-}
+  insertIntoDb,
+  getUserFromDb,
+  getSingleData,
+};

@@ -18,20 +18,32 @@ const insertIntoDb = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getUserFromDb = catchAsync(async (req: Request, res: Response) => {
-    const filters = pick(req.query, userFilterableFields);
-    const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
-    const result = await UserService.getUserFromDb(filters, options);
-  
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'user fetched successfully',
-      meta: result.meta,
-      data: result.data,
-    });
+  const filters = pick(req.query, userFilterableFields);
+  const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
+  const result = await UserService.getUserFromDb(filters, options);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'user fetched successfully',
+    meta: result.meta,
+    data: result.data,
   });
+});
+
+const getSingleData = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.getSingleData(req.params.id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'single user get successfully',
+    data: result,
+  });
+});
 
 export const UserController = {
-    insertIntoDb,
-    getUserFromDb
-}
+  insertIntoDb,
+  getUserFromDb,
+  getSingleData,
+};
