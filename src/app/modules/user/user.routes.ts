@@ -10,5 +10,6 @@ router.post(
   validateRequest(UserValidation.create),
   UserController.insertIntoDb
 );
+router.get('/', UserController.getUserFromDb);
 
 export const UserRouter = router;
