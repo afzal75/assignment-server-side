@@ -22,5 +22,17 @@ const create = z.object({
   }),
 });
 
+const update = z.object({
+    body: z.object({
+      email: z.string().email().optional(),
+      password: z.string().optional(),
+  
+      contactNo: z.string().optional(),
+      fullName: z.string().optional(),
+      location: z.string().optional(),
+      profileImage: z.string().optional(),
+    }),
+  });
 
-export const UserValidation = { create };
+
+export const UserValidation = { create, update };

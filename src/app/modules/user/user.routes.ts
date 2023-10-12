@@ -10,6 +10,11 @@ router.post(
   validateRequest(UserValidation.create),
   UserController.insertIntoDb
 );
+router.patch(
+    '/:id',
+    validateRequest(UserValidation.update),
+    UserController.updateUser
+  );
 router.get('/:id', UserController.getSingleData);
 router.get('/', UserController.getUserFromDb);
 
