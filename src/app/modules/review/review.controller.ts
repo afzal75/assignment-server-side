@@ -16,6 +16,30 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAllData = catchAsync(async (req: Request, res: Response) => {
+  const result = await ReviewService.getAllData();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Review fetched successfully',
+    data: result,
+  });
+});
+
+const deleteReview = catchAsync(async (req: Request, res: Response) => {
+  const result = await ReviewService.deleteReview(req.params.id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Review Deleled successfully',
+    data: result,
+  });
+});
+
 export const ReviewController = {
-    insertIntoDB
-}
+  insertIntoDB,
+  getAllData,
+  deleteReview,
+};
