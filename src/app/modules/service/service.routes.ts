@@ -11,13 +11,13 @@ router.post(
   ServiceController.insertIntoDB
 );
 router.patch(
-    '/:id',
-    validateRequest(ServiceValidation.update),
-    ServiceController.updateService
-  );
+  '/:id',
+  validateRequest(ServiceValidation.update),
+  ServiceController.updateService
+);
+router.delete('/:id', ServiceController.deleteService);
 router.get('/:id', ServiceController.getSingleService);
 
 router.get('/', ServiceController.getAllDataFromDB);
-
 
 export const ServiceRoutes = router;
