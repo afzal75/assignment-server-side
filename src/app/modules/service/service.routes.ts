@@ -10,5 +10,7 @@ router.post(
   validateRequest(ServiceValidation.create),
   ServiceController.insertIntoDB
 );
+router.get('/', ServiceController.getAllDataFromDB);
+
 
 export const ServiceRoutes = router;
