@@ -10,6 +10,11 @@ router.post(
   validateRequest(ServiceValidation.create),
   ServiceController.insertIntoDB
 );
+router.patch(
+    '/:id',
+    validateRequest(ServiceValidation.update),
+    ServiceController.updateService
+  );
 router.get('/:id', ServiceController.getSingleService);
 
 router.get('/', ServiceController.getAllDataFromDB);

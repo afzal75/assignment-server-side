@@ -71,14 +71,28 @@ const getAllDataFromDB = async (
 };
 
 const getSingleService = async (id: string): Promise<Service | null> => {
-    const result = await prisma.service.findUnique({
-      where: { id },
-    });
-    return result;
-  };
+  const result = await prisma.service.findUnique({
+    where: { id },
+  });
+  return result;
+};
+
+const updateService = async (
+  id: string,
+  payload: Partial<Service>
+): Promise<Service> => {
+  const result = await prisma.service.update({
+    where: {
+      id,
+    },
+    data: payload,
+  });
+  return result;
+};
 
 export const ProductService = {
   insertIntoDB,
   getAllDataFromDB,
-  getSingleService
+  getSingleService,
+  updateService,
 };
