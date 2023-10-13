@@ -21,6 +21,7 @@ model User {
   profileImage String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  Review       Review[]
 
   @@map("users")
 }
@@ -39,8 +40,21 @@ model Service {
   price       String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  Review      Review[]
 
   @@map("services")
 }
 
+model Review {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  serviceId String
+  service   Service  @relation(fields: [serviceId], references: [id])
+  review    String
+  rating    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
+  @@map("reviews")
+}
