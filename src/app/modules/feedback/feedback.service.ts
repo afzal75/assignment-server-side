@@ -14,11 +14,19 @@ const getDataFromDB = async (): Promise<FeedBack[]> => {
   const result = await prisma.feedBack.findMany({
     include: { Service: true, User: true },
   });
+  return result;
+};
 
+const deleteFeedback = async (id: string): Promise<FeedBack | null> => {
+  const result = await prisma.feedBack.delete({
+    where: { id },
+    include: { Service: true, User: true },
+  });
   return result;
 };
 
 export const FeedbackService = {
   insertIntoDB,
-  getDataFromDB
+  getDataFromDB,
+  deleteFeedback,
 };
