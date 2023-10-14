@@ -16,9 +16,30 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAllData = catchAsync(async (req: Request, res: Response) => {
+  const result = await AddToCartService.getAllData();
 
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'AddToCart fetched successfully',
+    data: result,
+  });
+});
 
+const getSingleData = catchAsync(async (req: Request, res: Response) => {
+  const result = await AddToCartService.getSingleData(req.params.id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'get single AddToCart successfully',
+    data: result,
+  });
+});
 
 export const AddToCartController = {
-    insertIntoDB
-}
+  insertIntoDB,
+  getAllData,
+  getSingleData,
+};
