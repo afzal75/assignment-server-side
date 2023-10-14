@@ -1,4 +1,5 @@
 import express from 'express';
+import { AddToCartRouter } from '../modules/addToCart/addToCart.routes';
 import { AuthRoutes } from '../modules/auth/auth.routes';
 import { BookingRoutes } from '../modules/booking/booking.routes';
 import { FeedbackRouter } from '../modules/feedback/feedback.routes';
@@ -32,6 +33,10 @@ const moduleRoutes = [
   {
     path: '/feedback',
     route: FeedbackRouter,
+  },
+  {
+    path: '/addToCart',
+    route: AddToCartRouter,
   },
 ];
 
