@@ -17,6 +17,38 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getBlogs = catchAsync(async (req: Request, res: Response) => {
+    const result = await BlogService.getBlogs();
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Blogs retrieved Successfully!!!',
+      data: result,
+    });
+  });
+  const getBlog = catchAsync(async (req: Request, res: Response) => {
+    const result = await BlogService.getBlog(req.params.id);
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Blog retrieved Successfully!!!',
+      data: result,
+    });
+  });
+  const deleteBlog = catchAsync(async (req: Request, res: Response) => {
+    const result = await BlogService.deleteBlog(req.params.id);
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Blog deleted Successfully!!!',
+      data: result,
+    });
+  });
+  
+
 export const BlogController = {
-    insertIntoDB
+    insertIntoDB,
+    getBlogs,
+    getBlog,
+    deleteBlog
 }

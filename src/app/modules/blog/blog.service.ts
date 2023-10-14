@@ -32,6 +32,40 @@ const insertIntoDB = async (data: Blog, token: string): Promise<Blog> => {
   return result;
 };
 
+const getBlogs = async (): Promise<Blog[]> => {
+    const result = await prisma.blog.findMany({
+      include: {
+        author: true,
+      },
+    });
+  
+    return result;
+  };
+  
+  const getBlog = async (id: string): Promise<Blog | null> => {
+    const result = await prisma.blog.findFirst({
+      where: { id },
+      include: { author: true },
+    });
+  
+    return result;
+  };
+  
+  const deleteBlog = async (id: string): Promise<Blog | null> => {
+    const result = await prisma.blog.delete({
+      where: { id },
+      include: {
+        author: true,
+      },
+    });
+  
+    return result;
+  };
+  
+
 export const BlogService = {
-    insertIntoDB
+    insertIntoDB,
+    getBlogs,
+    getBlog,
+    deleteBlog
 }
