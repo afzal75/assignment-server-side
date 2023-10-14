@@ -36,21 +36,38 @@ const getAllBookings = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getSingleBookings = catchAsync(async (req: Request, res: Response) => {
-    const token = req.headers.authorization as string;
-    const { id } = req.params;
-  
-    const result = await BookingService.getSingleBookings(token, id);
-  
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Get single Booking fetched successfully',
-      data: result,
-    });
+  const token = req.headers.authorization as string;
+  const { id } = req.params;
+
+  const result = await BookingService.getSingleBookings(token, id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Get single Booking fetched successfully',
+    data: result,
   });
+});
+
+const updateBookingData = catchAsync(async (req: Request, res: Response) => {
+  const token = req.headers.authorization as string;
+
+  const bookingData = req.body;
+  const { id } = req.params;
+
+  const result = await BookingService.updateBookingData(token, id, bookingData);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Booking data updated successfully successfully',
+    data: result,
+  });
+});
 
 export const BookingController = {
   insertIntoDB,
   getAllBookings,
-  getSingleBookings
+  getSingleBookings,
+  updateBookingData
 };

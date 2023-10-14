@@ -52,24 +52,58 @@ const getAllBookings = async (token: string): Promise<Booking[]> => {
 };
 
 const getSingleBookings = async (
-    token: string,
-    id: string
-  ): Promise<Booking | null> => {
-    const user = jwtHelpers.verifyToken(token, config.jwt.secret as Secret);
-  
-    if (!user) {
-      throw new ApiError(httpStatus.NOT_FOUND, 'user not found');
-    }
-  
-    const result = await prisma.booking.findUnique({
+  token: string,
+  id: string
+): Promise<Booking | null> => {
+  const user = jwtHelpers.verifyToken(token, config.jwt.secret as Secret);
+
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'user not found');
+  }
+
+  const result = await prisma.booking.findUnique({
+    where: { id },
+    include: { user: true, service: true },
+  });
+  return result;
+};
+
+const updateBookingData = async (
+  token: string,
+  id: string,
+  data: Partial<Booking>
+): Promise<Booking | null> => {
+  const user = jwtHelpers.verifyToken(token, config.jwt.secret as Secret);
+
+  const isExist = await prisma.booking.findFirst({
+    where: { id },
+  });
+
+  if (!isExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'service does not exist!');
+  }
+
+  if (user.role === 'admin') {
+    const result = await prisma.booking.update({
       where: { id },
-      include: { user: true, service: true },
+      data,
     });
     return result;
-  };
+  } else {
+    const result = await prisma.booking.update({
+      where: {
+        id,
+        userId: user.userId,
+      },
+      data,
+    });
+    return result;
+  }
+};
 
 export const BookingService = {
   insertIntoDB,
   getAllBookings,
-  getSingleBookings
+  getSingleBookings,
+  updateBookingData
 };
