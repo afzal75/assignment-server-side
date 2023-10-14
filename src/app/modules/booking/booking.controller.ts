@@ -20,6 +20,22 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAllBookings = catchAsync(async (req: Request, res: Response) => {
+    const token = req.headers.authorization as string;
+    console.log(token);
+  
+    // Pass booking data to the function
+    const result = await BookingService.getAllBookings(token);
+  
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Booking fetched successfully',
+      data: result,
+    });
+  });
+
 export const BookingController = {
-    insertIntoDB
+    insertIntoDB,
+    getAllBookings
 }
