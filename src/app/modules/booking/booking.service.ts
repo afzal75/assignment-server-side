@@ -40,18 +40,36 @@ const insertIntoDB = async (token: string, data: Booking): Promise<Booking> => {
 };
 
 const getAllBookings = async (token: string): Promise<Booking[]> => {
+  const user = jwtHelpers.verifyToken(token, config.jwt.secret as Secret);
+
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'user not found');
+  }
+  const result = await prisma.booking.findMany({
+    include: { user: true, service: true },
+  });
+  return result;
+};
+
+const getSingleBookings = async (
+    token: string,
+    id: string
+  ): Promise<Booking | null> => {
     const user = jwtHelpers.verifyToken(token, config.jwt.secret as Secret);
   
     if (!user) {
       throw new ApiError(httpStatus.NOT_FOUND, 'user not found');
     }
-    const result = await prisma.booking.findMany({
+  
+    const result = await prisma.booking.findUnique({
+      where: { id },
       include: { user: true, service: true },
     });
     return result;
   };
 
 export const BookingService = {
-    insertIntoDB,
-    getAllBookings
-}
+  insertIntoDB,
+  getAllBookings,
+  getSingleBookings
+};

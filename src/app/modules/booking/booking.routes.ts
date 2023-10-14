@@ -10,12 +10,15 @@ router.post(
   auth(ENUM_USER_ROLE.USER, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
   BookingController.insertIntoDB
 );
-
 router.get(
-    '/',
+    '/:id',
     auth(ENUM_USER_ROLE.USER, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
-    BookingController.getAllBookings
+    BookingController.getSingleBookings
   );
-
+router.get(
+  '/',
+  auth(ENUM_USER_ROLE.USER, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
+  BookingController.getAllBookings
+);
 
 export const BookingRoutes = router;
