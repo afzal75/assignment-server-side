@@ -10,6 +10,15 @@ const insertIntoDB = async (data: FeedBack): Promise<FeedBack> => {
   return result;
 };
 
+const getDataFromDB = async (): Promise<FeedBack[]> => {
+  const result = await prisma.feedBack.findMany({
+    include: { Service: true, User: true },
+  });
+
+  return result;
+};
+
 export const FeedbackService = {
   insertIntoDB,
+  getDataFromDB
 };

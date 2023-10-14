@@ -69,6 +69,11 @@
             "date": 1697266228737,
             "name": "C:\\Users\\afzal\\ASSIGENMENT-9\\university-management-core-service-starter\\logs\\winston\\successes\\phu-2023-14-10-12-success.log",
             "hash": "00ee85bf0d85bc86a1de4ed1c6bb927bc6056ca5c2b2d3a780f3d8ab265eebd7"
+        },
+        {
+            "date": 1697266803209,
+            "name": "C:\\Users\\afzal\\ASSIGENMENT-9\\university-management-core-service-starter\\logs\\winston\\successes\\phu-2023-14-10-13-success.log",
+            "hash": "234fd46ef9cbbfb6567cf86d33658121917bf0a83904cdae83cab54661f2b76b"
         }
     ],
     "hashType": "sha256"

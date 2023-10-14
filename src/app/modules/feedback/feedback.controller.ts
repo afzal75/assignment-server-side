@@ -16,6 +16,18 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getDataFromDB = catchAsync(async (req: Request, res: Response) => {
+  const result = await FeedbackService.getDataFromDB();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'All Feedback fetched successfully',
+    data: result,
+  });
+});
+
 export const FeedbackController = {
-    insertIntoDB
-}
+  insertIntoDB,
+  getDataFromDB,
+};
