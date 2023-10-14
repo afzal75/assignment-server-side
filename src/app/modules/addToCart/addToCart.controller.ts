@@ -38,8 +38,20 @@ const getSingleData = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const deleteCartData = catchAsync(async (req: Request, res: Response) => {
+    const result = await AddToCartService.deleteCartData(req.params.id);
+  
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'AddToCart deleted successfully',
+      data: result,
+    });
+  });
+
 export const AddToCartController = {
   insertIntoDB,
   getAllData,
   getSingleData,
+  deleteCartData
 };

@@ -27,8 +27,18 @@ const getSingleData = async (id: string): Promise<AddToCart | null> => {
   return result;
 };
 
+const deleteCartData = async (id: string): Promise<AddToCart | null> => {
+    const result = await prisma.addToCart.delete({
+      where: { id },
+      include: { Service: true, User: true },
+    });
+  
+    return result;
+  };
+
 export const AddToCartService = {
   insertIntoDB,
   getAllData,
   getSingleData,
+  deleteCartData
 };
