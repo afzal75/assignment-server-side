@@ -29,7 +29,7 @@ const SignInUser = async (payload: ISignInData): Promise<ISignInResponse> => {
 
   if (isUserExist.password && password) {
     if (!(await bcrypt.compare(password, isUserExist.password))) {
-      throw new ApiError(httpStatus.UNAUTHORIZED, 'Password is incorrect');
+      throw new ApiError(httpStatus.UNAUTHORIZED, 'Password does not match');
     }
   } else {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Password is missing');
@@ -37,12 +37,12 @@ const SignInUser = async (payload: ISignInData): Promise<ISignInResponse> => {
 
   const { id: userId, role } = isUserExist;
 
-  const token = jwtHelpers.createToken(
+  const accessToken = jwtHelpers.createToken(
     { userId, role },
     config.jwt.secret as Secret,
     config.jwt.expires_in as string
   );
-  return { token };
+  return { accessToken };
 };
 
 export const AuthService = { insertIntoDb, SignInUser };

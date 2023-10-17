@@ -94,6 +94,46 @@
             "date": 1697308367678,
             "name": "C:\\Users\\afzal\\ASSIGENMENT-9\\university-management-core-service-starter\\logs\\winston\\errors\\phu-2023-15-10-00-error.log",
             "hash": "ff116f80c68cd5925d242dc2d5c45ad676b9021351e0fc53e7d542bcf9f7ea28"
+        },
+        {
+            "date": 1697310375965,
+            "name": "C:\\Users\\afzal\\ASSIGENMENT-9\\university-management-core-service-starter\\logs\\winston\\errors\\phu-2023-15-10-01-error.log",
+            "hash": "791b3461aa59f7dc0f7c90ea797dad31adcf6a809e8d1a71955811aac7308dce"
+        },
+        {
+            "date": 1697351122323,
+            "name": "C:\\Users\\afzal\\ASSIGENMENT-9\\university-management-core-service-starter\\logs\\winston\\errors\\phu-2023-15-10-12-error.log",
+            "hash": "351adcc04ed0949813bcab1adcefd726c7a0f5d72dfcf4f46bf16cc9b6a595b0"
+        },
+        {
+            "date": 1697353770123,
+            "name": "C:\\Users\\afzal\\ASSIGENMENT-9\\university-management-core-service-starter\\logs\\winston\\errors\\phu-2023-15-10-13-error.log",
+            "hash": "06ebc13502a0871dcbb9775ab6a01e10aa0ca19db580cb7b2f7dcc498342cfbe"
+        },
+        {
+            "date": 1697385894485,
+            "name": "C:\\Users\\afzal\\ASSIGENMENT-9\\university-management-core-service-starter\\logs\\winston\\errors\\phu-2023-15-10-22-error.log",
+            "hash": "30a64d695776425463964c640d5c0b4a524c4977e61d026fb5b7b854e2dba2dd"
+        },
+        {
+            "date": 1697392394009,
+            "name": "C:\\Users\\afzal\\ASSIGENMENT-9\\university-management-core-service-starter\\logs\\winston\\errors\\phu-2023-15-10-23-error.log",
+            "hash": "86f3a38d7b6fb122bf5124641ecde7c680d61be232963012c3c164a3c02f1549"
+        },
+        {
+            "date": 1697394964326,
+            "name": "C:\\Users\\afzal\\ASSIGENMENT-9\\university-management-core-service-starter\\logs\\winston\\errors\\phu-2023-16-10-00-error.log",
+            "hash": "6465162fa8a0f62d8cf5ff22777c4a618a40f40f50cce5ef391a870f26b79050"
+        },
+        {
+            "date": 1697543206267,
+            "name": "C:\\Users\\afzal\\ASSIGENMENT-9\\university-management-core-service-starter\\logs\\winston\\errors\\phu-2023-17-10-17-error.log",
+            "hash": "31b99578d1429cd818c1f748b5f81782a7b314509d87a6501e1c12171871e9de"
+        },
+        {
+            "date": 1697544082399,
+            "name": "C:\\Users\\afzal\\ASSIGENMENT-9\\university-management-core-service-starter\\logs\\winston\\errors\\phu-2023-17-10-18-error.log",
+            "hash": "d85033d226a060cc312dd71e3e9583c0c0219c0a907580a8bbc58179f87fa101"
         }
     ],
     "hashType": "sha256"

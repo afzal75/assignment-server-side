@@ -1,9 +1,8 @@
 export type ISignInData = {
-    email?: string;
-    password?: string;
-  };
-  
-  export type ISignInResponse = {
-    token?: string;
-  };
-  
+  email?: string;
+  password?: string;
+};
+
+export type ISignInResponse = {
+  accessToken?: string;
+};
