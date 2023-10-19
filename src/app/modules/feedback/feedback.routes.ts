@@ -1,16 +1,17 @@
 import express from 'express';
 import { ENUM_USER_ROLE } from '../../../enums/user';
 import auth from '../../middlewares/auth';
-import { FeedbackController } from './feedback.controller';
+import { FeedBackController } from './feedback.controller';
 
 const router = express.Router();
 
 router.delete(
   '/:id',
   auth(ENUM_USER_ROLE.ADMIN),
-  FeedbackController.deleteFeedback
+  FeedBackController.deleteData
 );
-router.post('/', FeedbackController.insertIntoDB);
-router.get('/', FeedbackController.getDataFromDB);
+router.get('/:id', FeedBackController.getSingleData);
+router.post('/', FeedBackController.insertIntoDb);
+router.get('/', FeedBackController.getDataFromDb);
 
-export const FeedbackRouter = router;
+export const FeedBackRouter = router;

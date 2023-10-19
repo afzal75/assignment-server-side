@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Prisma, Service } from '@prisma/client';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IPaginationOptions } from '../../../interfaces/pagination';
@@ -105,7 +106,7 @@ const getServiceByCategoryId = async (
 ): Promise<Service[] | null> => {
   const result = await prisma.service.findMany({
     where: { categoryId },
-    include: { category: true },
+    include: { Category: true },
   });
   return result;
 };

@@ -8,22 +8,31 @@ const router = express.Router();
 router.post(
   '/',
   auth(ENUM_USER_ROLE.USER, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
-  BookingController.insertIntoDB
+  BookingController.insertIntoDb
 );
-router.get(
-  '/:id',
-  auth(ENUM_USER_ROLE.USER, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
-  BookingController.getSingleBookings
-);
-router.patch(
-    '/:id',
-    auth(ENUM_USER_ROLE.USER, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
-    BookingController.updateBookingData
-  );
+
 router.get(
   '/',
   auth(ENUM_USER_ROLE.USER, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
-  BookingController.getAllBookings
+  BookingController.getAllBooks
+);
+
+router.get(
+  '/:id',
+  auth(ENUM_USER_ROLE.USER, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
+  BookingController.getSingleBookeds
+);
+
+router.patch(
+  '/:id',
+  auth(ENUM_USER_ROLE.USER, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
+  BookingController.updateData
+);
+
+router.delete(
+  '/:id',
+  auth(ENUM_USER_ROLE.USER, ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
+  BookingController.deleteData
 );
 
 export const BookingRoutes = router;

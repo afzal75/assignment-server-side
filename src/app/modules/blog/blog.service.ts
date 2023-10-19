@@ -33,39 +33,54 @@ const insertIntoDB = async (data: Blog, token: string): Promise<Blog> => {
 };
 
 const getBlogs = async (): Promise<Blog[]> => {
-    const result = await prisma.blog.findMany({
-      include: {
-        author: true,
-      },
-    });
-  
-    return result;
-  };
-  
-  const getBlog = async (id: string): Promise<Blog | null> => {
-    const result = await prisma.blog.findFirst({
-      where: { id },
-      include: { author: true },
-    });
-  
-    return result;
-  };
-  
-  const deleteBlog = async (id: string): Promise<Blog | null> => {
-    const result = await prisma.blog.delete({
-      where: { id },
-      include: {
-        author: true,
-      },
-    });
-  
-    return result;
-  };
-  
+  const result = await prisma.blog.findMany({
+    include: {
+      author: true,
+    },
+  });
+
+  return result;
+};
+
+const getBlog = async (id: string): Promise<Blog | null> => {
+  const result = await prisma.blog.findFirst({
+    where: { id },
+    include: { author: true },
+  });
+
+  return result;
+};
+
+const deleteBlog = async (id: string): Promise<Blog | null> => {
+  const result = await prisma.blog.delete({
+    where: { id },
+    include: {
+      author: true,
+    },
+  });
+
+  return result;
+};
+
+const updatedData = async (
+  id: string,
+  payload: Partial<Blog>
+): Promise<Blog | null> => {
+  const result = await prisma.blog.update({
+    where: { id },
+    data: payload,
+    include: {
+      author: true,
+    },
+  });
+
+  return result;
+};
 
 export const BlogService = {
-    insertIntoDB,
-    getBlogs,
-    getBlog,
-    deleteBlog
-}
+  insertIntoDB,
+  getBlogs,
+  getBlog,
+  deleteBlog,
+  updatedData,
+};

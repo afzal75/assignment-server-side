@@ -5,8 +5,10 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { AddToCartService } from './addToCart.service';
 
-const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
-  const result = await AddToCartService.insertIntoDB(req.body);
+const insertIntoDb = catchAsync(async (req: Request, res: Response) => {
+  const token = req.headers.authorization as string;
+
+  const result = await AddToCartService.insertIntoDb(req.body, token);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -17,7 +19,9 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllData = catchAsync(async (req: Request, res: Response) => {
-  const result = await AddToCartService.getAllData();
+  const token = req.headers.authorization as string;
+
+  const result = await AddToCartService.getAllData(token);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -38,20 +42,20 @@ const getSingleData = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const deleteCartData = catchAsync(async (req: Request, res: Response) => {
-    const result = await AddToCartService.deleteCartData(req.params.id);
-  
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'AddToCart deleted successfully',
-      data: result,
-    });
+const deleteData = catchAsync(async (req: Request, res: Response) => {
+  const result = await AddToCartService.deleteData(req.params.id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'AddToCart deleted successfully',
+    data: result,
   });
+});
 
 export const AddToCartController = {
-  insertIntoDB,
+  insertIntoDb,
   getAllData,
   getSingleData,
-  deleteCartData
+  deleteData,
 };

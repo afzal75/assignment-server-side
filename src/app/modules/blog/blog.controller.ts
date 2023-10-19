@@ -16,39 +16,48 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
-
 const getBlogs = catchAsync(async (req: Request, res: Response) => {
-    const result = await BlogService.getBlogs();
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Blogs retrieved Successfully!!!',
-      data: result,
-    });
+  const result = await BlogService.getBlogs();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Blogs retrieved Successfully!!!',
+    data: result,
   });
-  const getBlog = catchAsync(async (req: Request, res: Response) => {
-    const result = await BlogService.getBlog(req.params.id);
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Blog retrieved Successfully!!!',
-      data: result,
-    });
+});
+const getBlog = catchAsync(async (req: Request, res: Response) => {
+  const result = await BlogService.getBlog(req.params.id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Blog retrieved Successfully!!!',
+    data: result,
   });
-  const deleteBlog = catchAsync(async (req: Request, res: Response) => {
-    const result = await BlogService.deleteBlog(req.params.id);
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Blog deleted Successfully!!!',
-      data: result,
-    });
+});
+const deleteBlog = catchAsync(async (req: Request, res: Response) => {
+  const result = await BlogService.deleteBlog(req.params.id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Blog deleted Successfully!!!',
+    data: result,
   });
-  
+});
+
+const updatedData = catchAsync(async (req: Request, res: Response) => {
+  const result = await BlogService.updatedData(req.params.id, req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Blog updated Successfully!!!',
+    data: result,
+  });
+});
 
 export const BlogController = {
-    insertIntoDB,
-    getBlogs,
-    getBlog,
-    deleteBlog
-}
+  insertIntoDB,
+  getBlogs,
+  getBlog,
+  deleteBlog,
+  updatedData,
+};

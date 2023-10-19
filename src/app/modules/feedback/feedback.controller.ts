@@ -3,10 +3,10 @@ import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync';
 
 import sendResponse from '../../../shared/sendResponse';
-import { FeedbackService } from './feedback.service';
+import { FeedBackService } from './feedback.service';
 
-const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
-  const result = await FeedbackService.insertIntoDB(req.body);
+const insertIntoDb = catchAsync(async (req: Request, res: Response) => {
+  const result = await FeedBackService.insertIntoDb(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -16,30 +16,42 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const getDataFromDB = catchAsync(async (req: Request, res: Response) => {
-  const result = await FeedbackService.getDataFromDB();
+const getDataFromDb = catchAsync(async (req: Request, res: Response) => {
+  const result = await FeedBackService.getDataFromDb();
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'All Feedback fetched successfully',
+    message: 'FeedBack fetched successfully',
     data: result,
   });
 });
 
-const deleteFeedback = catchAsync(async (req: Request, res: Response) => {
-  const result = await FeedbackService.deleteFeedback(req.params.id);
+const deleteData = catchAsync(async (req: Request, res: Response) => {
+  const result = await FeedBackService.deleteData(req.params.id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Feedback deleted successfully',
+    message: 'FeedBack delete successfully',
     data: result,
   });
 });
 
-export const FeedbackController = {
-  insertIntoDB,
-  getDataFromDB,
-  deleteFeedback,
+const getSingleData = catchAsync(async (req: Request, res: Response) => {
+  const result = await FeedBackService.getSingleData(req.params.id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'FeedBack single retrived successfully',
+    data: result,
+  });
+});
+
+export const FeedBackController = {
+  insertIntoDb,
+  getDataFromDb,
+  deleteData,
+  getSingleData,
 };
