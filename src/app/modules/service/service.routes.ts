@@ -1,23 +1,34 @@
 import express from 'express';
+import { ENUM_USER_ROLE } from '../../../enums/user';
+import auth from '../../middlewares/auth';
 import validateRequest from '../../middlewares/validateRequest';
-import { ServiceController } from './service.controller';
+import { ProductServiceController } from './service.controller';
 import { ServiceValidation } from './service.validation';
 
 const router = express.Router();
 
 router.post(
   '/',
+  auth(ENUM_USER_ROLE.ADMIN),
   validateRequest(ServiceValidation.create),
-  ServiceController.insertIntoDB
+  ProductServiceController.insertIntoDb
 );
+
+router.get(
+  '/category/:categoryId',
+  ProductServiceController.getServiceByCategoryId
+);
+
+router.get('/:id', ProductServiceController.getSingleData);
+
 router.patch(
   '/:id',
   validateRequest(ServiceValidation.update),
-  ServiceController.updateService
+  ProductServiceController.updateData
 );
-router.delete('/:id', ServiceController.deleteService);
-router.get('/:id', ServiceController.getSingleService);
 
-router.get('/', ServiceController.getAllDataFromDB);
+router.delete('/:id', ProductServiceController.deleteData);
 
-export const ServiceRoutes = router;
+router.get('/', ProductServiceController.getAllDataFromDb);
+
+export const ProductServiceRoutes = router;

@@ -6,33 +6,47 @@ import sendResponse from '../../../shared/sendResponse';
 import { serviceFilterableFields } from './service.constants';
 import { ProductService } from './service.service';
 
-const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
-  const result = await ProductService.insertIntoDB(req.body);
+const insertIntoDb = catchAsync(async (req: Request, res: Response) => {
+  const result = await ProductService.insertIntoDb(req.body);
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Service created successfully',
+    message: 'user created successfully',
     data: result,
   });
 });
 
-const getAllDataFromDB = catchAsync(async (req: Request, res: Response) => {
+const getAllDataFromDb = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, serviceFilterableFields);
   const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
 
-  const result = await ProductService.getAllDataFromDB(filters, options);
+  const result = await ProductService.getAllDataFromDb(filters, options);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Service fetched successfully',
+    message: 'user fetched successfully',
     meta: result.meta,
     data: result.data,
   });
 });
 
-const getSingleService = catchAsync(async (req: Request, res: Response) => {
-  const result = await ProductService.getSingleService(req.params.id);
+const getServiceByCategoryId = catchAsync(
+  async (req: Request, res: Response) => {
+    const { categoryId } = req.params;
+    const result = await ProductService.getServiceByCategoryId(categoryId);
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Services Fetched successfully',
+      data: result,
+    });
+  }
+);
+
+const getSingleData = catchAsync(async (req: Request, res: Response) => {
+  const result = await ProductService.getSingleData(req.params.id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -42,34 +56,35 @@ const getSingleService = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const updateService = catchAsync(async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const result = await ProductService.updateService(id, req.body);
-  
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Service updated successfully',
-      data: result,
-    });
-  });
+const updateData = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await ProductService.updateData(id, req.body);
 
-  const deleteService = catchAsync(async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const result = await ProductService.deleteService(id);
-  
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Service deleted successfully',
-      data: result,
-    });
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'data updated successfully',
+    data: result,
   });
+});
 
-export const ServiceController = {
-  insertIntoDB,
-  getAllDataFromDB,
-  getSingleService,
-  updateService,
-  deleteService
+const deleteData = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await ProductService.deleteData(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'data deleted successfully',
+    data: result,
+  });
+});
+
+export const ProductServiceController = {
+  insertIntoDb,
+  getAllDataFromDb,
+  getSingleData,
+  updateData,
+  deleteData,
+  getServiceByCategoryId,
 };

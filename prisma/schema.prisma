@@ -48,6 +48,8 @@ model Service {
   Booking     Booking[]
   FeedBack    FeedBack[]
   AddToCart   AddToCart[]
+  Category    Category?   @relation(fields: [categoryId], references: [id])
+  categoryId  String?
 
   @@map("services")
 }
@@ -124,11 +126,33 @@ model Blog {
 }
 
 model Faq {
-  id       String @id @default(uuid())
-  answer   String
-  question String
+  id        String   @id @default(uuid())
+  answer    String
+  question  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("faqs")
+}
+
+model UpcomingService {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  image       String
+  price       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("up_service")
+}
+
+model Category {
+  id        String    @id @default(uuid())
+  title     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Service   Service[]
+
+  @@map("categories")
 }

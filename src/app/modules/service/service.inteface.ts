@@ -1,4 +1,3 @@
 export type IServiceFilterRequest = {
-    searchTerm?: string;
-  };
-  
+  searchTerm?: string;
+};
