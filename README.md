@@ -1,69 +1,38 @@
-# University Management Core Service
-This guide will walk you through the process of setting up the University Management Core Service Starter project. By following these steps, you will clone the project, install dependencies, and configure Prisma for database management. Let's get started!
+* A Car Servicing Website Built with NextJs, Typesctipt, Tailwind, ANT and RTK Query.
+* Website live link: https://assignment-frontend-xi.vercel.app/
+* Server : https://internet-service-provider-backend.vercel.app
+* Super Admin Credential : sajeebbhuiyan16@gmail.com Password : 123456
+* Admin Credential: afzalbhuiyan16@gmail.com,
+Password : 123456
+* Project Description
+Your web application, the Car Servicing Booking Platform, is a comprehensive solution for users seeking to access the car services. The project is dedicated to simplifying the process of acquiring essential services, such as car service, broadband, Wi-Fi, TV boxes, and more. Key features of the platform include:
 
 
-## Installation Steps
-### Follow these steps to clone and set up starter project:
 
-1. `Clone the project:` Open your terminal or command prompt and run the following command to clone the project repository:
+* User Registration:
+Users can register on the platform, providing necessary details such as full name, contact information and email address..
 
-```bash
-git clone https://github.com/Programming-Hero-Next-Level-Development/university-management-core-service-starter.git university-management-core-service
-```
+* Service Selection:
+Users can conveniently browse and select from various service packages tailored to meet their specific service needs.
 
-2. `Navigate into the project directory:` Use the cd command to navigate into the project directory:
+* Shopping Cart:
+The platform includes a shopping cart feature, allowing users to assemble their desired services before finalizing their bookings.
 
-```bash
-cd university-management-core-service
-```
+* Booking Management:
+Users can manage their bookings, making adjustments and updates as necessary, with a smooth and intuitive interface.
 
-3. `Install project dependencies:` Next, install the project dependencies by running the following command:
+* Authentication and User Profiles:
+The project provides user authentication and profile management, including the ability for users to access and view their registered email address.
 
-```bash
-yarn install
-```
 
-4. Configure Prisma and the database connection:
+* Technology Used
+(Front-End:) ==== NextJs, Typescript, TailwindCss, ANT Design, React Hook Form
 
-- Add Prisma as a development dependency by running the following command:
-```bash
-yarn add prisma --save-dev
-```
+* (Back-End:) ==== ExpressJs, Prisma
 
-- Set up your Prisma project by creating the Prisma schema file using the following command:
-```bash
-npx prisma init
-```
+* (State-Management:) ==== RTK Query
 
-- Open the prisma/schema.prisma file and configure your database connection details.
+* (Database:) ==== Postgres
 
-```bash
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-```
-
-- Create a .env file in the project root directory and set the DATABASE_URL environment variable. Replace the placeholders with your database connection details:
-```bash
-DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA"
-```
-
-5. Creating the database schema
-6. Migrate the database schema: Use the following command to create and apply the initial database schema:
-
-```bash
-npx prisma migrate dev --name init
-```
-This command creates a new migration file based on your schema changes and applies it to your database.
-
-6. `Install Prisma Client:` Install the Prisma Client library by running the following command:
-```bash
-yarn add @prisma/client
-```
-
-This command installs the Prisma Client, which provides an interface to interact with your database.
-
-That's it! You have successfully set up the University Management Core Service Starter project. You can now start exploring and working with the codebase. Refer to the project documentation or README for further instructions on how to run and use the core service.
-
-Happy coding!
+* Deployment
+Front-ENd and Backend Deploy into Vercel

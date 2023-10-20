@@ -59,7 +59,7 @@ const deleteUser = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'user deleted successfully',
+    message: 'user updated successfully',
     data: result,
   });
 });
@@ -69,5 +69,5 @@ export const UserController = {
   getUserFromDb,
   getSingleData,
   updateUser,
-  deleteUser
+  deleteUser,
 };
